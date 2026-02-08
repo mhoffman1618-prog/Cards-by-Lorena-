@@ -8,7 +8,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1a1a2e">
-<link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -56,7 +55,7 @@ position: relative;
 z-index: 1;
 }
 
-/* ── Header ── */
+/* Header */
 .header {
 display: flex;
 align-items: center;
@@ -84,7 +83,7 @@ background-clip: text;
 letter-spacing: 0.5px;
 }
 
-/* ── Form ── */
+/* Form */
 .form-section {
 background: var(–bg-card);
 border-radius: 16px;
@@ -139,6 +138,12 @@ transition: border-color 0.3s, box-shadow 0.3s;
 outline: none;
 border-color: var(–accent);
 box-shadow: 0 0 0 3px var(–accent-soft);
+}
+
+/* Date input styling for dark theme */
+.field input[type=“date”]::-webkit-calendar-picker-indicator {
+filter: invert(0.7);
+cursor: pointer;
 }
 
 /* Photo Upload */
@@ -220,7 +225,7 @@ transform: scale(0.97);
 box-shadow: 0 6px 28px rgba(233,69,96,0.45);
 }
 
-/* ── Cards List ── */
+/* Cards List */
 .cards-header {
 display: flex;
 align-items: center;
@@ -277,6 +282,12 @@ from { opacity: 0; transform: translateY(12px); }
 to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes shake {
+0%, 100% { transform: translateX(0); }
+25% { transform: translateX(-6px); }
+75% { transform: translateX(6px); }
+}
+
 .card-entry-photo {
 width: 100%;
 height: 180px;
@@ -312,6 +323,16 @@ margin-bottom: 8px;
 .card-entry-info .date-line {
 font-size: 0.82rem;
 color: var(–text-muted);
+display: flex;
+align-items: center;
+gap: 6px;
+}
+
+.card-entry-info .date-line svg {
+width: 14px;
+height: 14px;
+stroke: var(–text-muted);
+flex-shrink: 0;
 }
 
 .card-entry-actions {
@@ -339,9 +360,21 @@ color: var(–accent);
 border-color: var(–accent);
 }
 
-/* Search / Filter */
+/* Search */
 .search-bar {
 margin-bottom: 16px;
+position: relative;
+}
+
+.search-bar .search-icon {
+position: absolute;
+left: 12px;
+top: 50%;
+transform: translateY(-50%);
+width: 18px;
+height: 18px;
+stroke: var(–text-muted);
+pointer-events: none;
 }
 
 .search-bar input {
@@ -354,9 +387,6 @@ color: var(–text-primary);
 font-family: ‘Nunito’, sans-serif;
 font-size: 0.9rem;
 transition: border-color 0.3s;
-background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘18’ height=‘18’ viewBox=‘0 0 24 24’ fill=‘none’ stroke=’%236c6c80’ stroke-width=‘2’ stroke-linecap=‘round’ stroke-linejoin=‘round’%3E%3Ccircle cx=‘11’ cy=‘11’ r=‘8’%3E%3C/circle%3E%3Cline x1=‘21’ y1=‘21’ x2=‘16.65’ y2=‘16.65’%3E%3C/line%3E%3C/svg%3E”);
-background-repeat: no-repeat;
-background-position: 12px center;
 }
 
 .search-bar input:focus {
@@ -401,22 +431,19 @@ transform: translateX(-50%) translateY(0);
 
 <div class="header">
 <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Paintbrush 1 -->
 <rect x="18" y="6" width="6" height="28" rx="2" transform="rotate(-15 18 6)" fill="#e94560"/>
 <path d="M14 32 C14 32, 12 40, 16 42 C20 44, 22 38, 22 38" fill="#f0c27f"/>
 <rect x="15.5" y="28" width="8" height="5" rx="1" transform="rotate(-15 15.5 28)" fill="#a0a0b8"/>
-<!-- Paintbrush 2 -->
 <rect x="36" y="4" width="6" height="28" rx="2" transform="rotate(12 36 4)" fill="#4ecca3"/>
 <path d="M38 30 C38 30, 35 38, 39 41 C43 44, 46 37, 46 37" fill="#f0c27f"/>
 <rect x="36" y="26" width="8" height="5" rx="1" transform="rotate(12 36 26)" fill="#a0a0b8"/>
-<!-- Paint dots -->
 <circle cx="10" cy="50" r="3.5" fill="#e94560" opacity="0.7"/>
 <circle cx="20" cy="54" r="2.5" fill="#4ecca3" opacity="0.6"/>
 <circle cx="30" cy="52" r="4" fill="#f0c27f" opacity="0.65"/>
 <circle cx="42" cy="55" r="2.8" fill="#e94560" opacity="0.5"/>
 <circle cx="52" cy="50" r="3.2" fill="#4ecca3" opacity="0.7"/>
 </svg>
-<h1>Lorena's Card Tracker</h1>
+<h1>Lorena&#39;s Card Tracker</h1>
 </div>
 
 <!-- New Card Form -->
@@ -427,7 +454,7 @@ transform: translateX(-50%) translateY(0);
 ```
 <div class="field">
 <label for="sentTo">Sent To</label>
-<input type="text" id="sentTo" placeholder="Recipient's name…" autocomplete="off">
+<input type="text" id="sentTo" placeholder="Recipient name" autocomplete="off">
 </div>
 
 <div class="field">
@@ -437,7 +464,7 @@ transform: translateX(-50%) translateY(0);
 
 <div class="field">
 <label for="occasion">Occasion</label>
-<input type="text" id="occasion" placeholder="Birthday, Anniversary, Thank You…" autocomplete="off">
+<input type="text" id="occasion" placeholder="Birthday, Anniversary, Thank You..." autocomplete="off">
 </div>
 
 <div class="field">
@@ -456,7 +483,7 @@ transform: translateX(-50%) translateY(0);
 </div>
 </div>
 
-<button class="btn-save" id="btnSave" onclick="saveCard()">Save Card</button>
+<button class="btn-save" id="btnSave">Save Card</button>
 ```
 
 </div>
@@ -469,7 +496,11 @@ transform: translateX(-50%) translateY(0);
 </div>
 
 <div class="search-bar">
-<input type="text" id="searchInput" placeholder="Search by name or occasion…" oninput="renderCards()">
+<svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+</svg>
+<input type="text" id="searchInput" placeholder="Search by name or occasion...">
 </div>
 
 <div id="cardsList"></div>
@@ -478,37 +509,47 @@ transform: translateX(-50%) translateY(0);
 <div class="toast" id="toast">Card saved!</div>
 
 <script>
-const STORAGE_KEY = 'lorenas_card_tracker';
+var STORAGE_KEY = 'lorenas_card_tracker';
+var currentPhoto = null;
 
-// Load cards from localStorage
+var calendarIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
+
 function getCards() {
 try {
-return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-} catch { return []; }
+var data = localStorage.getItem(STORAGE_KEY);
+return data ? JSON.parse(data) : [];
+} catch(e) {
+return [];
+}
 }
 
-function saveCards(cards) {
+function saveCardsToStorage(cards) {
 localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
 }
 
-// Set default date to today
-document.getElementById('dateSent').valueAsDate = new Date();
+function setTodayDate() {
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0');
+var yyyy = today.getFullYear();
+document.getElementById('dateSent').value = yyyy + '-' + mm + '-' + dd;
+}
+
+setTodayDate();
 
 // Photo handling
-let currentPhoto = null;
-
 document.getElementById('photoInput').addEventListener('change', function(e) {
-const file = e.target.files[0];
+var file = e.target.files[0];
 if (!file) return;
 
-const reader = new FileReader();
+var reader = new FileReader();
 reader.onload = function(ev) {
-// Compress image
-const img = new Image();
+var img = new Image();
 img.onload = function() {
-const canvas = document.createElement('canvas');
-const MAX = 800;
-let w = img.width, h = img.height;
+var canvas = document.createElement('canvas');
+var MAX = 800;
+var w = img.width;
+var h = img.height;
 if (w > MAX || h > MAX) {
 if (w > h) { h = h * MAX / w; w = MAX; }
 else { w = w * MAX / h; h = MAX; }
@@ -526,32 +567,32 @@ reader.readAsDataURL(file);
 });
 
 // Save card
-function saveCard() {
-const sentTo = document.getElementById('sentTo').value.trim();
-const dateSent = document.getElementById('dateSent').value;
-const occasion = document.getElementById('occasion').value.trim();
+document.getElementById('btnSave').addEventListener('click', function() {
+var sentTo = document.getElementById('sentTo').value.trim();
+var dateSent = document.getElementById('dateSent').value;
+var occasion = document.getElementById('occasion').value.trim();
 
 if (!sentTo) {
 shakeField('sentTo');
 return;
 }
 
-const card = {
+var card = {
 id: Date.now(),
-sentTo,
-dateSent,
-occasion,
+sentTo: sentTo,
+dateSent: dateSent,
+occasion: occasion,
 photo: currentPhoto
 };
 
-const cards = getCards();
+var cards = getCards();
 cards.unshift(card);
-saveCards(cards);
+saveCardsToStorage(cards);
 
 // Reset form
 document.getElementById('sentTo').value = '';
 document.getElementById('occasion').value = '';
-document.getElementById('dateSent').valueAsDate = new Date();
+setTodayDate();
 currentPhoto = null;
 document.getElementById('photoPreview').src = '';
 document.getElementById('photoArea').classList.remove('has-photo');
@@ -559,93 +600,106 @@ document.getElementById('photoInput').value = '';
 
 showToast('Card saved!');
 renderCards();
-}
+});
+
+// Search listener
+document.getElementById('searchInput').addEventListener('input', function() {
+renderCards();
+});
 
 function shakeField(id) {
-const el = document.getElementById(id);
-el.style.borderColor = 'var(--accent)';
+var el = document.getElementById(id);
+el.style.borderColor = '#e94560';
 el.style.animation = 'none';
-el.offsetHeight;
+void el.offsetHeight;
 el.style.animation = 'shake 0.4s ease';
-setTimeout(() => { el.style.borderColor = ''; }, 1500);
+setTimeout(function() { el.style.borderColor = ''; }, 1500);
 }
 
-// Delete card
 function deleteCard(id) {
 if (!confirm('Delete this card entry?')) return;
-const cards = getCards().filter(c => c.id !== id);
-saveCards(cards);
+var cards = getCards().filter(function(c) { return c.id !== id; });
+saveCardsToStorage(cards);
 renderCards();
 }
 
-// Render cards
 function renderCards() {
-const cards = getCards();
-const query = document.getElementById('searchInput').value.toLowerCase();
-const filtered = cards.filter(c =>
-c.sentTo.toLowerCase().includes(query) ||
-(c.occasion && c.occasion.toLowerCase().includes(query))
-);
+var cards = getCards();
+var query = document.getElementById('searchInput').value.toLowerCase();
+var filtered = cards.filter(function(c) {
+return c.sentTo.toLowerCase().indexOf(query) !== -1 ||
+(c.occasion && c.occasion.toLowerCase().indexOf(query) !== -1);
+});
 
-document.getElementById('cardCount').textContent = cards.length + (cards.length === 1 ? ' card' : ' cards');
+var countText = cards.length + (cards.length === 1 ? ' card' : ' cards');
+document.getElementById('cardCount').textContent = countText;
 
-const list = document.getElementById('cardsList');
+var list = document.getElementById('cardsList');
+
 if (filtered.length === 0) {
-list.innerHTML = `
-<div class="empty-state">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-<rect x="2" y="4" width="20" height="16" rx="2"/>
-<path d="M2 8h20"/>
-</svg>
-<p>${cards.length === 0 ? 'No cards logged yet — add your first one above!' : 'No matching cards found.'}</p>
-</div>
-`;
+var msg = cards.length === 0
+? 'No cards logged yet - add your first one above!'
+: 'No matching cards found.';
+list.innerHTML =
+'<div class="empty-state">' +
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+'<rect x="2" y="4" width="20" height="16" rx="2"/>' +
+'<path d="M2 8h20"/>' +
+'</svg>' +
+'<p>' + msg + '</p>' +
+'</div>';
 return;
 }
 
-list.innerHTML = filtered.map(c => {
-const dateStr = c.dateSent ? formatDate(c.dateSent) : 'No date';
-return `
-<div class="card-entry">
-${c.photo ? `<img class="card-entry-photo" src="${c.photo}" alt="Card for ${escHtml(c.sentTo)}">` : ''}
-<div class="card-entry-info">
-<div class="sent-to">${escHtml(c.sentTo)}</div>
-${c.occasion ? `<span class="occasion-badge">${escHtml(c.occasion)}</span>` : ''}
-<div class="date-line">📅 ${dateStr}</div>
-</div>
-<div class="card-entry-actions">
-<button class="btn-delete" onclick="deleteCard(${c.id})">Delete</button>
-</div>
-</div>
-`;
-}).join('');
+var html = '';
+for (var i = 0; i < filtered.length; i++) {
+var c = filtered[i];
+var dateStr = c.dateSent ? formatDate(c.dateSent) : 'No date';
+var photoHtml = c.photo
+? '<img class="card-entry-photo" src="' + c.photo + '" alt="Card photo">'
+: '';
+var occasionHtml = c.occasion
+? '<span class="occasion-badge">' + escHtml(c.occasion) + '</span>'
+: '';
+
+html +=
+'<div class="card-entry">' +
+photoHtml +
+'<div class="card-entry-info">' +
+'<div class="sent-to">' + escHtml(c.sentTo) + '</div>' +
+occasionHtml +
+'<div class="date-line">' + calendarIcon + ' ' + dateStr + '</div>' +
+'</div>' +
+'<div class="card-entry-actions">' +
+'<button class="btn-delete" onclick="deleteCard(' + c.id + ')">Delete</button>' +
+'</div>' +
+'</div>';
+}
+list.innerHTML = html;
 }
 
 function formatDate(dateStr) {
-const [y, m, d] = dateStr.split('-');
-const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-return `${months[parseInt(m)-1]} ${parseInt(d)}, ${y}`;
+var parts = dateStr.split('-');
+var y = parts[0];
+var m = parseInt(parts[1], 10);
+var d = parseInt(parts[2], 10);
+var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+return months[m - 1] + ' ' + d + ', ' + y;
 }
 
 function escHtml(str) {
-const d = document.createElement('div');
-d.textContent = str;
-return d.innerHTML;
+var div = document.createElement('div');
+div.textContent = str;
+return div.innerHTML;
 }
 
 function showToast(msg) {
-const t = document.getElementById('toast');
+var t = document.getElementById('toast');
 t.textContent = msg;
 t.classList.add('show');
-setTimeout(() => t.classList.remove('show'), 2200);
+setTimeout(function() { t.classList.remove('show'); }, 2200);
 }
 
-// Shake animation
-const style = document.createElement('style');
-style.textContent = `@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }`;
-document.head.appendChild(style);
-
-// Initial render
 renderCards();
 </script>
 
