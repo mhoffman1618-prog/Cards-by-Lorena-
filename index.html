@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Lorena's Card Tracker</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1a1a2e">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -15,55 +13,38 @@
 --bg-card: #1a1a2e;
 --bg-input: #16213e;
 --accent: #e94560;
---accent-soft: #e9456033;
---accent-hover: #ff6b81;
+--accent-soft: rgba(233,69,96,0.2);
 --text-primary: #eaeaea;
 --text-secondary: #a0a0b8;
 --text-muted: #6c6c80;
 --border: #2a2a45;
 --success: #4ecca3;
 --gold: #f0c27f;
---shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-font-family: ‘Nunito’, sans-serif;
-background: var(–bg-deep);
-color: var(–text-primary);
+font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+background-color: #0f0f1a;
+color: #eaeaea;
 min-height: 100vh;
-overflow-x: hidden;
-}
-
-body::before {
-content: ‘’;
-position: fixed;
-top: 0; left: 0; right: 0; bottom: 0;
-background:
-radial-gradient(ellipse at 20% 0%, rgba(233,69,96,0.08) 0%, transparent 50%),
-radial-gradient(ellipse at 80% 100%, rgba(78,204,163,0.06) 0%, transparent 50%);
-pointer-events: none;
-z-index: 0;
 }
 
 .container {
 max-width: 600px;
 margin: 0 auto;
-padding: 20px 16px 100px;
-position: relative;
-z-index: 1;
+padding: 20px 16px 100px 16px;
 }
 
-/* Header */
 .header {
 display: flex;
 align-items: center;
 justify-content: center;
 gap: 14px;
 margin-bottom: 32px;
-padding: 24px 0 20px;
-border-bottom: 1px solid var(–border);
+padding: 24px 0 20px 0;
+border-bottom: 1px solid #2a2a45;
 }
 
 .logo-icon {
@@ -73,30 +54,29 @@ flex-shrink: 0;
 }
 
 .header h1 {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', Georgia, serif;
 font-size: 1.75rem;
 font-weight: 700;
-background: linear-gradient(135deg, var(–accent), var(–gold));
+background: linear-gradient(135deg, #e94560, #f0c27f);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
-letter-spacing: 0.5px;
+color: #e94560;
 }
 
-/* Form */
 .form-section {
-background: var(–bg-card);
+background-color: #1a1a2e;
 border-radius: 16px;
 padding: 24px 20px;
-border: 1px solid var(–border);
-box-shadow: var(–shadow);
+border: 1px solid #2a2a45;
+box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 margin-bottom: 28px;
 }
 
 .form-section h2 {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', Georgia, serif;
 font-size: 1.1rem;
-color: var(–text-secondary);
+color: #a0a0b8;
 margin-bottom: 20px;
 font-weight: 400;
 letter-spacing: 1px;
@@ -107,71 +87,69 @@ text-transform: uppercase;
 margin-bottom: 18px;
 }
 
-.field:last-of-type {
-margin-bottom: 20px;
-}
-
 .field label {
 display: block;
 font-size: 0.8rem;
 font-weight: 700;
 text-transform: uppercase;
 letter-spacing: 1.2px;
-color: var(–text-muted);
+color: #6c6c80;
 margin-bottom: 8px;
 }
 
-.field input[type=“text”],
-.field input[type=“date”] {
+.field input[type="text"],
+.field input[type="date"] {
 width: 100%;
 padding: 12px 16px;
-background: var(–bg-input);
-border: 1px solid var(–border);
+background-color: #16213e;
+border: 1px solid #2a2a45;
 border-radius: 10px;
-color: var(–text-primary);
-font-family: ‘Nunito’, sans-serif;
+color: #eaeaea;
+font-family: 'Nunito', sans-serif;
 font-size: 1rem;
-transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.field input:focus {
+.field input[type="text"]:focus,
+.field input[type="date"]:focus {
 outline: none;
-border-color: var(–accent);
-box-shadow: 0 0 0 3px var(–accent-soft);
+border-color: #e94560;
+box-shadow: 0 0 0 3px rgba(233,69,96,0.2);
 }
 
-/* Date input styling for dark theme */
-.field input[type=“date”]::-webkit-calendar-picker-indicator {
+.field input[type="date"]::-webkit-calendar-picker-indicator {
 filter: invert(0.7);
 cursor: pointer;
 }
 
-/* Photo Upload */
 .photo-upload-area {
-border: 2px dashed var(–border);
+border: 2px dashed #2a2a45;
 border-radius: 12px;
 padding: 24px;
 text-align: center;
 cursor: pointer;
-transition: border-color 0.3s, background 0.3s;
 position: relative;
 overflow: hidden;
 }
 
 .photo-upload-area:hover {
-border-color: var(–accent);
-background: var(–accent-soft);
+border-color: #e94560;
+background-color: rgba(233,69,96,0.1);
 }
 
 .photo-upload-area.has-photo {
 padding: 0;
 border-style: solid;
-border-color: var(–success);
+border-color: #4ecca3;
 }
 
-.photo-upload-area input[type=“file”] {
+.photo-upload-area input[type="file"] {
 position: absolute;
-inset: 0;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+width: 100%;
+height: 100%;
 opacity: 0;
 cursor: pointer;
 }
@@ -179,12 +157,12 @@ cursor: pointer;
 .upload-placeholder svg {
 width: 36px;
 height: 36px;
-stroke: var(–text-muted);
+stroke: #6c6c80;
 margin-bottom: 8px;
 }
 
 .upload-placeholder p {
-color: var(–text-muted);
+color: #6c6c80;
 font-size: 0.85rem;
 }
 
@@ -199,21 +177,20 @@ display: none;
 .photo-upload-area.has-photo .upload-placeholder { display: none; }
 .photo-upload-area.has-photo .photo-preview { display: block; }
 
-/* Save Button */
 .btn-save {
 width: 100%;
 padding: 14px;
-background: linear-gradient(135deg, var(–accent), #c0392b);
-color: #fff;
+background: linear-gradient(135deg, #e94560, #c0392b);
+color: #ffffff;
 border: none;
 border-radius: 12px;
-font-family: ‘Nunito’, sans-serif;
+font-family: 'Nunito', sans-serif;
 font-size: 1rem;
 font-weight: 700;
 letter-spacing: 1px;
 text-transform: uppercase;
 cursor: pointer;
-transition: transform 0.15s, box-shadow 0.3s;
+margin-top: 20px;
 box-shadow: 0 4px 20px rgba(233,69,96,0.3);
 }
 
@@ -221,11 +198,6 @@ box-shadow: 0 4px 20px rgba(233,69,96,0.3);
 transform: scale(0.97);
 }
 
-.btn-save:hover {
-box-shadow: 0 6px 28px rgba(233,69,96,0.45);
-}
-
-/* Cards List */
 .cards-header {
 display: flex;
 align-items: center;
@@ -234,31 +206,63 @@ margin-bottom: 16px;
 }
 
 .cards-header h2 {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', Georgia, serif;
 font-size: 1.2rem;
 font-weight: 600;
-color: var(–text-primary);
+color: #eaeaea;
 }
 
 .card-count {
 font-size: 0.8rem;
-color: var(–text-muted);
-background: var(–bg-input);
+color: #6c6c80;
+background-color: #16213e;
 padding: 4px 12px;
 border-radius: 20px;
-border: 1px solid var(–border);
+border: 1px solid #2a2a45;
+}
+
+.search-bar {
+margin-bottom: 16px;
+position: relative;
+}
+
+.search-bar .search-icon {
+position: absolute;
+left: 12px;
+top: 50%;
+transform: translateY(-50%);
+width: 18px;
+height: 18px;
+stroke: #6c6c80;
+pointer-events: none;
+}
+
+.search-bar input {
+width: 100%;
+padding: 10px 16px 10px 40px;
+background-color: #1a1a2e;
+border: 1px solid #2a2a45;
+border-radius: 10px;
+color: #eaeaea;
+font-family: 'Nunito', sans-serif;
+font-size: 0.9rem;
+}
+
+.search-bar input:focus {
+outline: none;
+border-color: #e94560;
 }
 
 .empty-state {
 text-align: center;
 padding: 48px 20px;
-color: var(–text-muted);
+color: #6c6c80;
 }
 
 .empty-state svg {
 width: 56px;
 height: 56px;
-stroke: var(–border);
+stroke: #2a2a45;
 margin-bottom: 16px;
 }
 
@@ -266,26 +270,13 @@ margin-bottom: 16px;
 font-size: 0.95rem;
 }
 
-/* Card Entry */
 .card-entry {
-background: var(–bg-card);
-border: 1px solid var(–border);
+background-color: #1a1a2e;
+border: 1px solid #2a2a45;
 border-radius: 14px;
 overflow: hidden;
 margin-bottom: 14px;
 box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-animation: slideIn 0.35s ease-out;
-}
-
-@keyframes slideIn {
-from { opacity: 0; transform: translateY(12px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes shake {
-0%, 100% { transform: translateX(0); }
-25% { transform: translateX(-6px); }
-75% { transform: translateX(6px); }
 }
 
 .card-entry-photo {
@@ -300,17 +291,17 @@ padding: 16px 18px;
 }
 
 .card-entry-info .sent-to {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', Georgia, serif;
 font-size: 1.15rem;
 font-weight: 600;
-color: var(–text-primary);
+color: #eaeaea;
 margin-bottom: 6px;
 }
 
 .card-entry-info .occasion-badge {
 display: inline-block;
-background: var(–accent-soft);
-color: var(–accent);
+background-color: rgba(233,69,96,0.2);
+color: #e94560;
 font-size: 0.75rem;
 font-weight: 700;
 text-transform: uppercase;
@@ -322,7 +313,7 @@ margin-bottom: 8px;
 
 .card-entry-info .date-line {
 font-size: 0.82rem;
-color: var(–text-muted);
+color: #6c6c80;
 display: flex;
 align-items: center;
 gap: 6px;
@@ -331,7 +322,7 @@ gap: 6px;
 .card-entry-info .date-line svg {
 width: 14px;
 height: 14px;
-stroke: var(–text-muted);
+stroke: #6c6c80;
 flex-shrink: 0;
 }
 
@@ -339,68 +330,31 @@ flex-shrink: 0;
 display: flex;
 justify-content: flex-end;
 padding: 0 18px 14px;
-gap: 8px;
 }
 
 .btn-delete {
-background: transparent;
-border: 1px solid var(–border);
-color: var(–text-muted);
+background-color: transparent;
+border: 1px solid #2a2a45;
+color: #6c6c80;
 padding: 6px 14px;
 border-radius: 8px;
 font-size: 0.78rem;
-font-family: ‘Nunito’, sans-serif;
+font-family: 'Nunito', sans-serif;
 font-weight: 600;
 cursor: pointer;
-transition: color 0.2s, border-color 0.2s;
 }
 
 .btn-delete:hover {
-color: var(–accent);
-border-color: var(–accent);
+color: #e94560;
+border-color: #e94560;
 }
 
-/* Search */
-.search-bar {
-margin-bottom: 16px;
-position: relative;
-}
-
-.search-bar .search-icon {
-position: absolute;
-left: 12px;
-top: 50%;
-transform: translateY(-50%);
-width: 18px;
-height: 18px;
-stroke: var(–text-muted);
-pointer-events: none;
-}
-
-.search-bar input {
-width: 100%;
-padding: 10px 16px 10px 40px;
-background: var(–bg-card);
-border: 1px solid var(–border);
-border-radius: 10px;
-color: var(–text-primary);
-font-family: ‘Nunito’, sans-serif;
-font-size: 0.9rem;
-transition: border-color 0.3s;
-}
-
-.search-bar input:focus {
-outline: none;
-border-color: var(–accent);
-}
-
-/* Toast */
 .toast {
 position: fixed;
 bottom: 30px;
 left: 50%;
 transform: translateX(-50%) translateY(80px);
-background: var(–success);
+background-color: #4ecca3;
 color: #0f0f1a;
 padding: 12px 28px;
 border-radius: 10px;
@@ -415,20 +369,20 @@ z-index: 999;
 transform: translateX(-50%) translateY(0);
 }
 
-/* Responsive */
+@keyframes shake {
+0%, 100% { transform: translateX(0); }
+25% { transform: translateX(-6px); }
+75% { transform: translateX(6px); }
+}
+
 @media (max-width: 420px) {
 .header h1 { font-size: 1.4rem; }
-.container { padding: 14px 12px 80px; }
+.container { padding: 14px 12px 80px 12px; }
 }
 </style>
-
 </head>
 <body>
-
 <div class="container">
-
-<!-- Header with Paintbrush Logo -->
-
 <div class="header">
 <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="18" y="6" width="6" height="28" rx="2" transform="rotate(-15 18 6)" fill="#e94560"/>
@@ -446,35 +400,28 @@ transform: translateX(-50%) translateY(0);
 <h1>Lorena&#39;s Card Tracker</h1>
 </div>
 
-<!-- New Card Form -->
-
 <div class="form-section">
 <h2>Log a New Card</h2>
-
-```
 <div class="field">
 <label for="sentTo">Sent To</label>
 <input type="text" id="sentTo" placeholder="Recipient name" autocomplete="off">
 </div>
-
 <div class="field">
 <label for="dateSent">Date Sent</label>
 <input type="date" id="dateSent">
 </div>
-
 <div class="field">
 <label for="occasion">Occasion</label>
 <input type="text" id="occasion" placeholder="Birthday, Anniversary, Thank You..." autocomplete="off">
 </div>
-
 <div class="field">
 <label>Card Photo</label>
 <div class="photo-upload-area" id="photoArea">
 <div class="upload-placeholder">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-<rect x="3" y="3" width="18" height="18" rx="2"/>
-<circle cx="8.5" cy="8.5" r="1.5"/>
-<path d="M21 15l-5-5L5 21"/>
+<rect x="3" y="3" width="18" height="18" rx="2"></rect>
+<circle cx="8.5" cy="8.5" r="1.5"></circle>
+<path d="M21 15l-5-5L5 21"></path>
 </svg>
 <p>Tap to upload a photo</p>
 </div>
@@ -482,13 +429,8 @@ transform: translateX(-50%) translateY(0);
 <input type="file" id="photoInput" accept="image/*">
 </div>
 </div>
-
 <button class="btn-save" id="btnSave">Save Card</button>
-```
-
 </div>
-
-<!-- Cards List -->
 
 <div class="cards-header">
 <h2>Sent Cards</h2>
@@ -509,44 +451,43 @@ transform: translateX(-50%) translateY(0);
 <div class="toast" id="toast">Card saved!</div>
 
 <script>
-var STORAGE_KEY = 'lorenas_card_tracker';
+var STORAGE_KEY = "lorenas_card_tracker";
 var currentPhoto = null;
 
-var calendarIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
+var calendarSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>';
 
 function getCards() {
 try {
 var data = localStorage.getItem(STORAGE_KEY);
-return data ? JSON.parse(data) : [];
+if (data) { return JSON.parse(data); }
+return [];
 } catch(e) {
 return [];
 }
 }
 
-function saveCardsToStorage(cards) {
+function storeCards(cards) {
 localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
 }
 
-function setTodayDate() {
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var yyyy = today.getFullYear();
-document.getElementById('dateSent').value = yyyy + '-' + mm + '-' + dd;
+function getTodayString() {
+var t = new Date();
+var dd = String(t.getDate()).padStart(2, "0");
+var mm = String(t.getMonth() + 1).padStart(2, "0");
+var yyyy = t.getFullYear();
+return yyyy + "-" + mm + "-" + dd;
 }
 
-setTodayDate();
+document.getElementById("dateSent").value = getTodayString();
 
-// Photo handling
-document.getElementById('photoInput').addEventListener('change', function(e) {
+document.getElementById("photoInput").addEventListener("change", function(e) {
 var file = e.target.files[0];
 if (!file) return;
-
 var reader = new FileReader();
 reader.onload = function(ev) {
 var img = new Image();
 img.onload = function() {
-var canvas = document.createElement('canvas');
+var canvas = document.createElement("canvas");
 var MAX = 800;
 var w = img.width;
 var h = img.height;
@@ -556,24 +497,28 @@ else { w = w * MAX / h; h = MAX; }
 }
 canvas.width = w;
 canvas.height = h;
-canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-currentPhoto = canvas.toDataURL('image/jpeg', 0.7);
-document.getElementById('photoPreview').src = currentPhoto;
-document.getElementById('photoArea').classList.add('has-photo');
+canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+currentPhoto = canvas.toDataURL("image/jpeg", 0.7);
+document.getElementById("photoPreview").src = currentPhoto;
+document.getElementById("photoArea").classList.add("has-photo");
 };
 img.src = ev.target.result;
 };
 reader.readAsDataURL(file);
 });
 
-// Save card
-document.getElementById('btnSave').addEventListener('click', function() {
-var sentTo = document.getElementById('sentTo').value.trim();
-var dateSent = document.getElementById('dateSent').value;
-var occasion = document.getElementById('occasion').value.trim();
+document.getElementById("btnSave").addEventListener("click", function() {
+var sentTo = document.getElementById("sentTo").value.trim();
+var dateSent = document.getElementById("dateSent").value;
+var occasion = document.getElementById("occasion").value.trim();
 
 if (!sentTo) {
-shakeField('sentTo');
+var el = document.getElementById("sentTo");
+el.style.borderColor = "#e94560";
+el.style.animation = "none";
+void el.offsetHeight;
+el.style.animation = "shake 0.4s ease";
+setTimeout(function() { el.style.borderColor = ""; }, 1500);
 return;
 }
 
@@ -587,121 +532,83 @@ photo: currentPhoto
 
 var cards = getCards();
 cards.unshift(card);
-saveCardsToStorage(cards);
+storeCards(cards);
 
-// Reset form
-document.getElementById('sentTo').value = '';
-document.getElementById('occasion').value = '';
-setTodayDate();
+document.getElementById("sentTo").value = "";
+document.getElementById("occasion").value = "";
+document.getElementById("dateSent").value = getTodayString();
 currentPhoto = null;
-document.getElementById('photoPreview').src = '';
-document.getElementById('photoArea').classList.remove('has-photo');
-document.getElementById('photoInput').value = '';
+document.getElementById("photoPreview").src = "";
+document.getElementById("photoArea").classList.remove("has-photo");
+document.getElementById("photoInput").value = "";
 
-showToast('Card saved!');
+showToast("Card saved!");
 renderCards();
 });
 
-// Search listener
-document.getElementById('searchInput').addEventListener('input', function() {
+document.getElementById("searchInput").addEventListener("input", function() {
 renderCards();
 });
-
-function shakeField(id) {
-var el = document.getElementById(id);
-el.style.borderColor = '#e94560';
-el.style.animation = 'none';
-void el.offsetHeight;
-el.style.animation = 'shake 0.4s ease';
-setTimeout(function() { el.style.borderColor = ''; }, 1500);
-}
 
 function deleteCard(id) {
-if (!confirm('Delete this card entry?')) return;
+if (!confirm("Delete this card entry?")) return;
 var cards = getCards().filter(function(c) { return c.id !== id; });
-saveCardsToStorage(cards);
+storeCards(cards);
 renderCards();
+}
+
+function escHtml(str) {
+var div = document.createElement("div");
+div.textContent = str;
+return div.innerHTML;
+}
+
+function formatDate(dateStr) {
+var parts = dateStr.split("-");
+var y = parts[0];
+var m = parseInt(parts[1], 10);
+var d = parseInt(parts[2], 10);
+var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+return months[m - 1] + " " + d + ", " + y;
 }
 
 function renderCards() {
 var cards = getCards();
-var query = document.getElementById('searchInput').value.toLowerCase();
+var query = document.getElementById("searchInput").value.toLowerCase();
 var filtered = cards.filter(function(c) {
 return c.sentTo.toLowerCase().indexOf(query) !== -1 ||
 (c.occasion && c.occasion.toLowerCase().indexOf(query) !== -1);
 });
 
-var countText = cards.length + (cards.length === 1 ? ' card' : ' cards');
-document.getElementById('cardCount').textContent = countText;
+document.getElementById("cardCount").textContent = cards.length + (cards.length === 1 ? " card" : " cards");
 
-var list = document.getElementById('cardsList');
+var list = document.getElementById("cardsList");
 
 if (filtered.length === 0) {
-var msg = cards.length === 0
-? 'No cards logged yet - add your first one above!'
-: 'No matching cards found.';
-list.innerHTML =
-'<div class="empty-state">' +
-'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
-'<rect x="2" y="4" width="20" height="16" rx="2"/>' +
-'<path d="M2 8h20"/>' +
-'</svg>' +
-'<p>' + msg + '</p>' +
-'</div>';
+var msg = cards.length === 0 ? "No cards logged yet - add your first one above!" : "No matching cards found.";
+list.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 8h20"></path></svg><p>' + msg + '</p></div>';
 return;
 }
 
-var html = '';
+var html = "";
 for (var i = 0; i < filtered.length; i++) {
 var c = filtered[i];
-var dateStr = c.dateSent ? formatDate(c.dateSent) : 'No date';
-var photoHtml = c.photo
-? '<img class="card-entry-photo" src="' + c.photo + '" alt="Card photo">'
-: '';
-var occasionHtml = c.occasion
-? '<span class="occasion-badge">' + escHtml(c.occasion) + '</span>'
-: '';
-
-html +=
-'<div class="card-entry">' +
-photoHtml +
-'<div class="card-entry-info">' +
-'<div class="sent-to">' + escHtml(c.sentTo) + '</div>' +
-occasionHtml +
-'<div class="date-line">' + calendarIcon + ' ' + dateStr + '</div>' +
-'</div>' +
-'<div class="card-entry-actions">' +
-'<button class="btn-delete" onclick="deleteCard(' + c.id + ')">Delete</button>' +
-'</div>' +
-'</div>';
+var dateStr = c.dateSent ? formatDate(c.dateSent) : "No date";
+var photoHtml = c.photo ? '<img class="card-entry-photo" src="' + c.photo + '" alt="Card photo">' : "";
+var occasionHtml = c.occasion ? '<span class="occasion-badge">' + escHtml(c.occasion) + '</span>' : "";
+html += '<div class="card-entry">' + photoHtml + '<div class="card-entry-info"><div class="sent-to">' + escHtml(c.sentTo) + '</div>' + occasionHtml + '<div class="date-line">' + calendarSVG + " " + dateStr + '</div></div><div class="card-entry-actions"><button class="btn-delete" onclick="deleteCard(' + c.id + ')">Delete</button></div></div>';
 }
 list.innerHTML = html;
 }
 
-function formatDate(dateStr) {
-var parts = dateStr.split('-');
-var y = parts[0];
-var m = parseInt(parts[1], 10);
-var d = parseInt(parts[2], 10);
-var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-return months[m - 1] + ' ' + d + ', ' + y;
-}
-
-function escHtml(str) {
-var div = document.createElement('div');
-div.textContent = str;
-return div.innerHTML;
-}
-
 function showToast(msg) {
-var t = document.getElementById('toast');
+var t = document.getElementById("toast");
 t.textContent = msg;
-t.classList.add('show');
-setTimeout(function() { t.classList.remove('show'); }, 2200);
+t.classList.add("show");
+setTimeout(function() { t.classList.remove("show"); }, 2200);
 }
 
 renderCards();
 </script>
-
 </body>
 </html>
